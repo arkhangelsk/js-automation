@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  hub:
+    restart: always
+    image: selenium/hub:3.6.0-copper
+    ports:
+      - "4444:4444"
+    # environment:
+      # - GRID_TIMEOUT=600 # Uncomment to increase nodes' timeout (in seconds)
+
+  chrome:
+    restart: always
+    image: selenium/node-chrome-debug:3.6.0-copper
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - no_proxy=""
+    depends_on:
+      - hub
+
+  chrome-single:
+    restart: always
+    image: selenium/node-chrome-debug:3.6.0-copper
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - no_proxy=""
+    depends_on:
+      - hub
+    ports:
+      - "5901:5900"

@@ -1,0 +1,42 @@
+{
+  "name": "js-automation",
+  "version": "1.0.0",
+  "description": "Acceptance Test Automation",
+  "main": "index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "./scripts/test-parallel.sh",
+    "test:smoke": "SMOKE_TESTING=${SMOKE_TESTING:-1} RETRIES=${RETRIES:-0} npm run test:local src/tests/e2e/",
+    "test:a11y": "npm run test:local src/tests/test.js",
+    "test:local": "mocha -t 100000 --config ./support/mocha.opts",
+    "test:local-all": "npm run test:local -- src/tests --recursive",
+    "build": "babel --ignore src/tests src/ -d lib/ "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "2.18.1",
+    "selenium-webdriver": "3.6.0"
+  },
+  "devDependencies": {
+    "@types/selenium-webdriver": "3.0.4",
+    "axe-core": "2.3.1",
+    "axe-webdriverjs": "1.1.5",
+    "babel-cli": "6.26.0",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "1.6.0",
+    "babel-register": "6.26.0",
+    "chai": "4.1.2",
+    "chromedriver": "2.35.0",
+    "mkdirp": "0.5.1",
+    "mocha": "3.5.0",
+    "mocha-each": "1.1.0",
+    "mocha-parallel-tests": "1.2.9",
+    "request": "2.83.0",
+    "request-promise": "4.2.2"
+  }
+}
